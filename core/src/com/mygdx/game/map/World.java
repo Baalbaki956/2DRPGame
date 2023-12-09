@@ -23,7 +23,7 @@ public class World implements Disposable{
 		map = new TmxMapLoader().load("xml/map.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map /*, scale*/);
 		
-		player = new Player(5, 5);
+		player = new Player(map, 5, 5);
 	}
 	
 	public void render() {
