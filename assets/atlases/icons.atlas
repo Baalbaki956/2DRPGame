@@ -1,0 +1,17 @@
+icons.png
+size:256,32
+repeat:none
+backpack
+bounds:116,10,16,16
+gear
+bounds:98,10,16,16
+logout
+bounds:80,10,16,16
+menu
+bounds:54,2,24,24
+rounded-rectangle
+bounds:2,2,24,24
+rounded-rectangle-hovered
+bounds:28,2,24,24
+writing
+bounds:134,10,16,16
