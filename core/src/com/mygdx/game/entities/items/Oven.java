@@ -1,18 +1,19 @@
-package com.mygdx.game.entities;
+package com.mygdx.game.entities.items;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.game.map.world;
+import com.mygdx.game.entities.Usable;
+import com.mygdx.game.map.World;
 
-public class Lever extends Usable {
-
-	boolean isBridgeClicked = false;
+public class Oven implements Usable {
+	
+	boolean isOvenClicked = false;
 	
 	@Override
-	public void use(world world) {
+	public void use(World world) {
 		TiledMapTileLayer collisionLayer = (TiledMapTileLayer) world.getMap().getLayers().get("Wall");
 		Vector3 clickCoords = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 		world.getScreen().getCamera().unproject(clickCoords);
@@ -22,24 +23,23 @@ public class Lever extends Usable {
 		
 		if (world.isInRange(tileX, tileY, 1)) {
 			Cell clickedCell = collisionLayer.getCell(tileX, tileY);
+			
 			if (clickedCell != null) {
 				TiledMapTile clickedTile = clickedCell.getTile();
-				if (clickedTile != null && clickedTile.getProperties().containsKey("isBridge")) {
-					isBridgeClicked = !isBridgeClicked;
+				if (clickedTile != null && clickedTile.getProperties().containsKey("isOven")) {
+					isOvenClicked = !isOvenClicked;
 
-					if (isBridgeClicked) {
-						TiledMapTile newTile = world.getTilesetTile(4);
-						world.spawnTile(1, 10, newTile, "Ground");
-						world.spawnTile(2, 10, newTile, "Ground");
-						world.spawnTile(3, 10, newTile, "Ground");
+					if (isOvenClicked) {
+						TiledMapTile ovenOn = world.getTilesetTile("tileset", 6);
+						world.spawnTile(tileX, tileY, ovenOn, "Wall");
 					} else {
-						TiledMapTile newTile = world.getTilesetTile(2);
-						world.spawnTile(1, 10, newTile, "Ground");
-						world.spawnTile(2, 10, newTile, "Ground");
-						world.spawnTile(3, 10, newTile, "Ground");
+						TiledMapTile ovenOff = world.getTilesetTile("tileset", 5);
+						world.spawnTile(tileX, tileY, ovenOff, "Wall");
 					}
 				}
 			}
 		}
 	}
+	
+	
 }

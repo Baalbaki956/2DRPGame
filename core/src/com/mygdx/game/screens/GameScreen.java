@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.MyGame;
-import com.mygdx.game.map.world;
+import com.mygdx.game.map.World;
 import com.mygdx.game.ui.IconGroup;
 import com.mygdx.game.ui.InventoryPanel;
 import com.mygdx.game.ui.LogoutPanel;
@@ -20,7 +20,7 @@ public class GameScreen implements Screen {
 	private OrthographicCamera camera;
 	private OrthographicCamera uiCamera;
 	
-	private world world;
+	private World world;
 	private Vector3 mousePos = new Vector3();
 	
 	private IconGroup iconGroup;
@@ -41,7 +41,7 @@ public class GameScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false);
 		
-		world = new world(this);
+		world = new World(this);
 		logoutPanel = new LogoutPanel(0, 0, "");
 		logoutPanel.setPosition(Gdx.graphics.getWidth() / 2 - logoutPanel.getTextureWidth() / 2, Gdx.graphics.getHeight() / 2);
 		inventoryPanel = new InventoryPanel(-216, -24);

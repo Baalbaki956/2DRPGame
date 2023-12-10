@@ -8,18 +8,17 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
-import com.mygdx.game.entities.Lever;
-import com.mygdx.game.entities.Oven;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.entities.Usable;
+import com.mygdx.game.entities.items.Lever;
+import com.mygdx.game.entities.items.Oven;
 import com.mygdx.game.screens.GameScreen;
 
-public class world implements Disposable {
+public class World implements Disposable {
 
 	private GameScreen screen;
-	private static TiledMap map;
+	private TiledMap map;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private float scale = 2f;
 	
@@ -27,9 +26,9 @@ public class world implements Disposable {
 	private Usable lever;
 
 	// Entiites
-	private static Player player;
+	private Player player;
 
-	public world(GameScreen screen) {
+	public World(GameScreen screen) {
 		this.screen = screen;
 
 		map = new TmxMapLoader().load("xml/map.tmx");
@@ -75,8 +74,8 @@ public class world implements Disposable {
 		return distanceX <= rangeInTiles && distanceY <= rangeInTiles;
 	}
 	
-	public TiledMapTile getTilesetTile(int index) {
-		return getMap().getTileSets().getTileSet("tileset").getTile(index);
+	public TiledMapTile getTilesetTile(String tileset, int index) {
+		return getMap().getTileSets().getTileSet(tileset).getTile(index);
 	}
 	
 	public void spawnTile(int x, int y, TiledMapTile newTile, String layer) {
