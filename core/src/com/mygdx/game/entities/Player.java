@@ -13,10 +13,10 @@ public class Player {
 
 	private Texture texture;
 	private int x, y;
-	private TiledMapTileLayer collisionLayer;
+	private TiledMap map;
 
 	public Player(TiledMap map, int x, int y) {
-		this.collisionLayer = (TiledMapTileLayer) map.getLayers().get(0);
+		this.map = map;
 		this.x = x;
 		this.y = y;
 		this.texture = new Texture("entities/player.png");
@@ -47,14 +47,17 @@ public class Player {
 	}
 
 	private boolean isCellBlocked(int x, int y) {
-	    Cell cell = collisionLayer.getCell(x, y);
-	    if (cell != null) {
-	        TiledMapTile tile = cell.getTile();
-	        if (tile != null && tile.getProperties().containsKey("isBlocked")) {
-	            return true;
-	        }
-	    }
-	    return false;
+		Cell cellGround = ((TiledMapTileLayer) (map.getLayers().get(0))).getCell(x, y);
+		Cell cellWall = ((TiledMapTileLayer) (map.getLayers().get("Wall"))).getCell(x, y);
+
+		if ((cellGround != null && cellGround.getTile() != null
+				&& cellGround.getTile().getProperties().containsKey("isBlocked"))
+				|| (cellWall != null && cellWall.getTile() != null
+						&& cellWall.getTile().getProperties().containsKey("isBlocked"))) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public void move(int dx, int dy) {

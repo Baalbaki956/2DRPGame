@@ -6,4 +6,22 @@
    <property name="isBlocked" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="2">
+  <properties>
+   <property name="isBlocked" type="bool" value="true"/>
+   <property name="isBridge" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="4">
+  <properties>
+   <property name="isBlocked" type="bool" value="true"/>
+   <property name="isOven" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="5">
+  <properties>
+   <property name="isBlocked" type="bool" value="true"/>
+   <property name="isOven" type="bool" value="true"/>
+  </properties>
+ </tile>
 </tileset>
